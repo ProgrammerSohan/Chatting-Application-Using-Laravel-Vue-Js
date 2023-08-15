@@ -1,6 +1,9 @@
 <?php
 
+use auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->group(function(){
+    Route::get('/', function () {
+
+        return view('home');
+    });
+    Route::post('user/logout', [UserController::class, 'logout'])
+    ->name('logout');
 });
+
+Route::get('user/register', [UserController::class, 'registerForm'])
+    ->name('register');
+
+Route::post('user/register', [UserController::class, 'store'])
+    ->name('register');
+
+Route::get('user/login', [UserController::class, 'loginForm'])
+    ->name('login');
+
+Route::post('user/login', [UserController::class, 'auth'])
+    ->name('login');
