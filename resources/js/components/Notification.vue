@@ -8,8 +8,8 @@
     import { reactive } from 'vue';
 
     const data = reactive({
-        message: 'Sohan has logged in',
-        class: 'alert-success',
+        message: '',
+        class: '',
         show: false
     });
 
